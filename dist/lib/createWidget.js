@@ -21,16 +21,24 @@ var createWidget = function createWidget(id, cb) {
   if (window.SC) {
     // the API was alread loaded, return widget asynchronously
     setTimeout(function () {
-      return cb(window.SC.Widget(id));
+      try {
+        cb(window.SC.Widget(id));
+      } catch (error) {
+        console.log(error);
+      }
     }, 0);
   } else {
     // load the API, it's namespaced as `window.SC`
     (0, _loadScript2.default)('https://w.soundcloud.com/player/api.js', function (err) {
-      if (err) throw new Error('Failed to load Soundcloud API: ' + err.message);
+      try {
+        if (err) throw new Error('Failed to load Soundcloud API: ' + err.message);
 
-      if (!window.SC) throw new Error('Soundcloud namespace is not available after API loaded');
+        if (!window.SC) throw new Error('Soundcloud namespace is not available after API loaded');
 
-      return cb(window.SC.Widget(id)); // eslint-disable-line new-cap
+        return cb(window.SC.Widget(id)); // eslint-disable-line new-cap
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 };
