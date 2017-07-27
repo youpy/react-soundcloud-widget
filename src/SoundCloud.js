@@ -54,12 +54,16 @@ class SoundCloud extends React.Component {
    */
 
   _createWidget() {
-    createWidget(this.props.id, (widget) => {
-      if (widget) {
-        this._setupWidget(widget);
-        this._reloadWidget();
-      }
-    });
+    try {
+      createWidget(this.props.id, (widget) => {
+        if (widget) {
+          this._setupWidget(widget);
+          this._reloadWidget();
+        }
+      });
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   /**

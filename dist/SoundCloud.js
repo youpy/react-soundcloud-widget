@@ -97,12 +97,16 @@ var SoundCloud = function (_React$Component) {
     value: function _createWidget() {
       var _this2 = this;
 
-      (0, _createWidget3.default)(this.props.id, function (widget) {
-        if (widget) {
-          _this2._setupWidget(widget);
-          _this2._reloadWidget();
-        }
-      });
+      try {
+        (0, _createWidget3.default)(this.props.id, function (widget) {
+          if (widget) {
+            _this2._setupWidget(widget);
+            _this2._reloadWidget();
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     /**
