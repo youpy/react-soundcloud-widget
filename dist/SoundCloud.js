@@ -98,8 +98,10 @@ var SoundCloud = function (_React$Component) {
       var _this2 = this;
 
       (0, _createWidget3.default)(this.props.id, function (widget) {
-        _this2._setupWidget(widget);
-        _this2._reloadWidget();
+        if (widget) {
+          _this2._setupWidget(widget);
+          _this2._reloadWidget();
+        }
       });
     }
 
@@ -140,9 +142,11 @@ var SoundCloud = function (_React$Component) {
   }, {
     key: '_unbindEvents',
     value: function _unbindEvents() {
-      this._internalWidget.unbind(window.SC.Widget.Events.PLAY);
-      this._internalWidget.unbind(window.SC.Widget.Events.PAUSE);
-      this._internalWidget.unbind(window.SC.Widget.Events.FINISH);
+      if (this._internalWidget) {
+        this._internalWidget.unbind(window.SC.Widget.Events.PLAY);
+        this._internalWidget.unbind(window.SC.Widget.Events.PAUSE);
+        this._internalWidget.unbind(window.SC.Widget.Events.FINISH);
+      }
     }
 
     /**
