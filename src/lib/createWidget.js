@@ -12,10 +12,27 @@ import load from 'load-script';
  */
 
 const createWidget = (id, cb) => {
+  if (window.SC) {
+    // the API was alread loaded, return widget asynchronously
+    setTimeout(() => { try {
+      cb(window.SC.Widget(id))
+    } catch (error) {
+      console.log(error)
+    }}, 0);
+  } else {
     // load the API, it's namespaced as `window.SC`
-  return load('https://w.soundcloud.com/player/api.js', () => {
-    return cb(window.SC.Widget(id)); // eslint-disable-line new-cap
-  });
+    load('https://w.soundcloud.com/player/api.js', (err) => {
+      try {
+        if (err) throw new Error(`Failed to load Soundcloud API: ${err.message}`)
+
+        if (!window.SC) throw new Error(`Soundcloud namespace is not available after API loaded`)
+
+        return cb(window.SC.Widget(id)); // eslint-disable-line new-cap
+      } catch (error) {
+        console.log(error)
+      }
+    });
+  }
 };
 
 /**

@@ -54,10 +54,16 @@ class SoundCloud extends React.Component {
    */
 
   _createWidget() {
-    createWidget(this.props.id, (widget) => {
-      this._setupWidget(widget);
-      this._reloadWidget();
-    });
+    try {
+      createWidget(this.props.id, (widget) => {
+        if (widget) {
+          this._setupWidget(widget);
+          this._reloadWidget();
+        }
+      });
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   /**
@@ -66,7 +72,7 @@ class SoundCloud extends React.Component {
    * @param {Object} Widget
    */
 
-  _setupWidget(widget) {
+  _setupWidget = (widget) => {
     this._internalWidget = widget;
     this._bindEvents();
   }
@@ -80,7 +86,7 @@ class SoundCloud extends React.Component {
    * time the url changes it breaks the back button. Super bummer.
    */
 
-  _reloadWidget() {
+  _reloadWidget = () => {
     this._internalWidget.load(this.props.url, this.props.opts);
   }
 
@@ -100,9 +106,11 @@ class SoundCloud extends React.Component {
    */
 
   _unbindEvents() {
-    this._internalWidget.unbind(window.SC.Widget.Events.PLAY);
-    this._internalWidget.unbind(window.SC.Widget.Events.PAUSE);
-    this._internalWidget.unbind(window.SC.Widget.Events.FINISH);
+    if (this._internalWidget) {
+      this._internalWidget.unbind(window.SC.Widget.Events.PLAY);
+      this._internalWidget.unbind(window.SC.Widget.Events.PAUSE);
+      this._internalWidget.unbind(window.SC.Widget.Events.FINISH);
+    }
   }
 
   /**
