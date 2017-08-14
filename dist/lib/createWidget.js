@@ -13,16 +13,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Create a new widget by requesting and using the SoundCloud Widget API.
  *
- * @param {String} id - reference to iframe element for widget
+ * @param {Object} el - reference to iframe element for widget
  * @param {Function} cb
  */
 
-var createWidget = function createWidget(id, cb) {
+var createWidget = function createWidget(el, cb) {
   if (window.SC) {
     // the API was alread loaded, return widget asynchronously
     setTimeout(function () {
       try {
-        cb(window.SC.Widget(id));
+        cb(window.SC.Widget(el));
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +35,7 @@ var createWidget = function createWidget(id, cb) {
 
         if (!window.SC) throw new Error('Soundcloud namespace is not available after API loaded');
 
-        return cb(window.SC.Widget(id)); // eslint-disable-line new-cap
+        return cb(window.SC.Widget(el)); // eslint-disable-line new-cap
       } catch (error) {
         console.log(error);
       }

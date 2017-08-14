@@ -98,7 +98,7 @@ var SoundCloud = function (_React$Component) {
       var _this2 = this;
 
       try {
-        (0, _createWidget3.default)(this.props.id, function (widget) {
+        (0, _createWidget3.default)(this.iframeEl, function (widget) {
           if (widget) {
             _this2._setupWidget(widget);
             _this2._reloadWidget();
@@ -160,7 +160,12 @@ var SoundCloud = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement('iframe', { id: this.props.id,
+        ref: function ref(el) {
+          _this3.iframeEl = el;
+        },
         width: '100%',
         height: this.props.height || (this.props.opts.visual ? '450' : '166'),
         scrolling: 'no',
