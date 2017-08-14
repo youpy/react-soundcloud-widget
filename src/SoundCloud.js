@@ -55,7 +55,7 @@ class SoundCloud extends React.Component {
 
   _createWidget() {
     try {
-      createWidget(this.props.id, (widget) => {
+      createWidget(this.iframeEl, (widget) => {
         if (widget) {
           this._setupWidget(widget);
           this._reloadWidget();
@@ -120,6 +120,7 @@ class SoundCloud extends React.Component {
   render() {
     return (
       <iframe id={this.props.id}
+              ref={(el) => { this.iframeEl = el }}
               width="100%"
               height={this.props.height || (this.props.opts.visual ? '450' : '166')}
               scrolling="no"

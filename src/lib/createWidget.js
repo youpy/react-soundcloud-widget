@@ -7,15 +7,15 @@ import load from 'load-script';
 /**
  * Create a new widget by requesting and using the SoundCloud Widget API.
  *
- * @param {String} id - reference to iframe element for widget
+ * @param {Object} el - reference to iframe element for widget
  * @param {Function} cb
  */
 
-const createWidget = (id, cb) => {
+const createWidget = (el, cb) => {
   if (window.SC) {
     // the API was alread loaded, return widget asynchronously
     setTimeout(() => { try {
-      cb(window.SC.Widget(id))
+      cb(window.SC.Widget(el))
     } catch (error) {
       console.log(error)
     }}, 0);
@@ -27,7 +27,7 @@ const createWidget = (id, cb) => {
 
         if (!window.SC) throw new Error(`Soundcloud namespace is not available after API loaded`)
 
-        return cb(window.SC.Widget(id)); // eslint-disable-line new-cap
+        return cb(window.SC.Widget(el)); // eslint-disable-line new-cap
       } catch (error) {
         console.log(error)
       }
