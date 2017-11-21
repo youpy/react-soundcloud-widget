@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/troybetz/react-soundcloud-widget",
   "dependencies": {
-    "load-script": "^1.0.0"
+    "load-script": "^1.0.0",
+    "proptypes": "^1.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.2.0",

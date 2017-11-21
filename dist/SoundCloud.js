@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _createWidget2 = require('./lib/createWidget');
 
 var _createWidget3 = _interopRequireDefault(_createWidget2);
@@ -181,20 +185,20 @@ var SoundCloud = function (_React$Component) {
 SoundCloud.propTypes = {
   // url to play. It's kept in sync, changing it will
   // cause the widget to refresh and play the new url.
-  url: _react2.default.PropTypes.string.isRequired,
+  url: _propTypes2.default.string.isRequired,
 
   // custom ID for widget iframe element
-  id: _react2.default.PropTypes.string,
+  id: _propTypes2.default.string,
 
-  height: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
+  height: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
 
   // widget parameters for appearance and auto play.
-  opts: _react2.default.PropTypes.objectOf(_react2.default.PropTypes.bool),
+  opts: _propTypes2.default.objectOf(_propTypes2.default.bool),
 
   // event subscriptions
-  onPlay: _react2.default.PropTypes.func,
-  onPause: _react2.default.PropTypes.func,
-  onEnd: _react2.default.PropTypes.func
+  onPlay: _propTypes2.default.func,
+  onPause: _propTypes2.default.func,
+  onEnd: _propTypes2.default.func
 };
 
 SoundCloud.defaultProps = {
