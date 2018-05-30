@@ -1,20 +1,22 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _createWidget2 = require('./lib/createWidget');
+var _createWidget2 = require("./lib/createWidget");
 
 var _createWidget3 = _interopRequireDefault(_createWidget2);
 
@@ -65,7 +67,7 @@ var SoundCloud = function (_React$Component) {
   }
 
   _createClass(SoundCloud, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       this._createWidget();
     }
@@ -76,17 +78,17 @@ var SoundCloud = function (_React$Component) {
      */
 
   }, {
-    key: 'shouldComponentUpdate',
+    key: "shouldComponentUpdate",
     value: function shouldComponentUpdate(nextProps) {
       return nextProps.url !== this.props.url;
     }
   }, {
-    key: 'componentDidUpdate',
+    key: "componentDidUpdate",
     value: function componentDidUpdate() {
       this._reloadWidget();
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this._unbindEvents();
     }
@@ -97,7 +99,7 @@ var SoundCloud = function (_React$Component) {
      */
 
   }, {
-    key: '_createWidget',
+    key: "_createWidget",
     value: function _createWidget() {
       var _this2 = this;
 
@@ -129,7 +131,7 @@ var SoundCloud = function (_React$Component) {
      */
 
   }, {
-    key: '_bindEvents',
+    key: "_bindEvents",
 
 
     /**
@@ -148,7 +150,7 @@ var SoundCloud = function (_React$Component) {
      */
 
   }, {
-    key: '_unbindEvents',
+    key: "_unbindEvents",
     value: function _unbindEvents() {
       if (this._internalWidget) {
         this._internalWidget.unbind(window.SC.Widget.Events.PLAY);
@@ -162,20 +164,21 @@ var SoundCloud = function (_React$Component) {
      */
 
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this3 = this;
 
-      return _react2.default.createElement('iframe', { id: this.props.id,
+      return _react2.default.createElement("iframe", _extends({
+        id: this.props.id,
         ref: function ref(el) {
           _this3.iframeEl = el;
         },
-        width: '100%',
-        height: this.props.height || (this.props.opts.visual ? '450' : '166'),
-        scrolling: 'no',
-        frameBorder: 'no',
-        src: 'https://w.soundcloud.com/player/?url='
-      });
+        width: "100%",
+        height: this.props.height || (this.props.opts.visual ? "450" : "166"),
+        scrolling: "no",
+        frameBorder: "no",
+        src: "https://w.soundcloud.com/player/?url="
+      }, this.props.opts.auto_play ? { allow: "autoplay" } : {}));
     }
   }]);
 
@@ -202,7 +205,7 @@ SoundCloud.propTypes = {
 };
 
 SoundCloud.defaultProps = {
-  id: 'react-sc-widget',
+  id: "react-sc-widget",
   opts: {},
   onPlay: function onPlay() {},
   onPause: function onPause() {},

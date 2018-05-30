@@ -2,9 +2,9 @@
  * Module dependencies
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import createWidget from './lib/createWidget';
+import React from "react";
+import PropTypes from "prop-types";
+import createWidget from "./lib/createWidget";
 
 /**
  * Create a new `SoundCloud` component.
@@ -18,7 +18,6 @@ import createWidget from './lib/createWidget';
  */
 
 class SoundCloud extends React.Component {
-
   /**
    * @param {Object} props
    */
@@ -56,14 +55,14 @@ class SoundCloud extends React.Component {
 
   _createWidget() {
     try {
-      createWidget(this.iframeEl, (widget) => {
+      createWidget(this.iframeEl, widget => {
         if (widget) {
           this._setupWidget(widget);
           this._reloadWidget();
         }
       });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 
@@ -73,10 +72,10 @@ class SoundCloud extends React.Component {
    * @param {Object} Widget
    */
 
-  _setupWidget = (widget) => {
+  _setupWidget = widget => {
     this._internalWidget = widget;
     this._bindEvents();
-  }
+  };
 
   /**
    * This is the only way to manipulate the embedded iframe, it's essentially
@@ -89,7 +88,7 @@ class SoundCloud extends React.Component {
 
   _reloadWidget = () => {
     this._internalWidget.load(this.props.url, this.props.opts);
-  }
+  };
 
   /**
    * Listen for events coming from `widget`, and pass them up the
@@ -98,7 +97,10 @@ class SoundCloud extends React.Component {
 
   _bindEvents() {
     this._internalWidget.bind(window.SC.Widget.Events.PLAY, this.props.onPlay);
-    this._internalWidget.bind(window.SC.Widget.Events.PAUSE, this.props.onPause);
+    this._internalWidget.bind(
+      window.SC.Widget.Events.PAUSE,
+      this.props.onPause
+    );
     this._internalWidget.bind(window.SC.Widget.Events.FINISH, this.props.onEnd);
   }
 
@@ -144,10 +146,7 @@ SoundCloud.propTypes = {
   // custom ID for widget iframe element
   id: PropTypes.string,
 
-  height: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   // widget parameters for appearance and auto play.
   opts: PropTypes.objectOf(PropTypes.bool),
@@ -155,15 +154,15 @@ SoundCloud.propTypes = {
   // event subscriptions
   onPlay: PropTypes.func,
   onPause: PropTypes.func,
-  onEnd: PropTypes.func,
+  onEnd: PropTypes.func
 };
 
 SoundCloud.defaultProps = {
-  id: 'react-sc-widget',
+  id: "react-sc-widget",
   opts: {},
   onPlay: () => {},
   onPause: () => {},
-  onEnd: () => {},
+  onEnd: () => {}
 };
 
 /**
