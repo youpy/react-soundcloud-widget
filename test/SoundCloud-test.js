@@ -25,6 +25,7 @@ describe('SoundCloud Widget', () => {
         scrolling="no"
         frameBorder="no"
         src="https://w.soundcloud.com/player/?url="
+        ref={output.ref}
       />
     );
   });
@@ -39,6 +40,7 @@ describe('SoundCloud Widget', () => {
         scrolling="no"
         frameBorder="no"
         src="https://w.soundcloud.com/player/?url="
+        ref={output.ref}
       />
     );
   });
@@ -53,6 +55,7 @@ describe('SoundCloud Widget', () => {
         scrolling="no"
         frameBorder="no"
         src="https://w.soundcloud.com/player/?url="
+        ref={output.ref}
       />
     );
   });
@@ -67,11 +70,28 @@ describe('SoundCloud Widget', () => {
         scrolling="no"
         frameBorder="no"
         src="https://w.soundcloud.com/player/?url="
+        ref={output.ref}
       />
     );
   });
 
-  it('should load a url', () => {
+  it("should render an iframe with auto_play", () => {
+    const { output } = render({ url, opts: { auto_play: true } });
+    expect(output).toEqual(
+      <iframe
+        id="react-sc-widget"
+        width="100%"
+        height="166"
+        scrolling="no"
+        frameBorder="no"
+        src="https://w.soundcloud.com/player/?url="
+        ref={output.ref}
+        allow="autoplay"
+      />
+    );
+  });
+
+  it("should load a url", () => {
     expect(renderDOM({ url }).widgetStub.load.calls[0].arguments[0]).toBe(url);
   });
 

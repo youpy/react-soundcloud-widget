@@ -120,13 +120,17 @@ class SoundCloud extends React.Component {
 
   render() {
     return (
-      <iframe id={this.props.id}
-              ref={(el) => { this.iframeEl = el }}
-              width="100%"
-              height={this.props.height || (this.props.opts.visual ? '450' : '166')}
-              scrolling="no"
-              frameBorder="no"
-              src="https://w.soundcloud.com/player/?url="
+      <iframe
+        id={this.props.id}
+        ref={el => {
+          this.iframeEl = el;
+        }}
+        width="100%"
+        height={this.props.height || (this.props.opts.visual ? "450" : "166")}
+        scrolling="no"
+        frameBorder="no"
+        src="https://w.soundcloud.com/player/?url="
+        {...(this.props.opts.auto_play ? { allow: "autoplay" } : {})}
       />
     );
   }
