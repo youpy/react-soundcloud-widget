@@ -140,6 +140,7 @@ var SoundCloud = function (_React$Component) {
      */
 
     value: function _bindEvents() {
+      this._internalWidget.bind(window.SC.Widget.Events.READY, this.props.onReady);
       this._internalWidget.bind(window.SC.Widget.Events.PLAY, this.props.onPlay);
       this._internalWidget.bind(window.SC.Widget.Events.PAUSE, this.props.onPause);
       this._internalWidget.bind(window.SC.Widget.Events.FINISH, this.props.onEnd);
@@ -153,6 +154,7 @@ var SoundCloud = function (_React$Component) {
     key: "_unbindEvents",
     value: function _unbindEvents() {
       if (this._internalWidget) {
+        this._internalWidget.unbind(window.SC.Widget.Events.READY);
         this._internalWidget.unbind(window.SC.Widget.Events.PLAY);
         this._internalWidget.unbind(window.SC.Widget.Events.PAUSE);
         this._internalWidget.unbind(window.SC.Widget.Events.FINISH);
@@ -199,6 +201,7 @@ SoundCloud.propTypes = {
   opts: _propTypes2.default.objectOf(_propTypes2.default.bool),
 
   // event subscriptions
+  onReady: _propTypes2.default.func,
   onPlay: _propTypes2.default.func,
   onPause: _propTypes2.default.func,
   onEnd: _propTypes2.default.func
@@ -207,6 +210,7 @@ SoundCloud.propTypes = {
 SoundCloud.defaultProps = {
   id: "react-sc-widget",
   opts: {},
+  onReady: function onReady() {},
   onPlay: function onPlay() {},
   onPause: function onPause() {},
   onEnd: function onEnd() {}
