@@ -96,6 +96,10 @@ class SoundCloud extends React.Component {
    */
 
   _bindEvents() {
+    this._internalWidget.bind(
+      window.SC.Widget.Events.READY,
+      this.props.onReady
+    );
     this._internalWidget.bind(window.SC.Widget.Events.PLAY, this.props.onPlay);
     this._internalWidget.bind(
       window.SC.Widget.Events.PAUSE,
@@ -110,6 +114,7 @@ class SoundCloud extends React.Component {
 
   _unbindEvents() {
     if (this._internalWidget) {
+      this._internalWidget.unbind(window.SC.Widget.Events.READY);
       this._internalWidget.unbind(window.SC.Widget.Events.PLAY);
       this._internalWidget.unbind(window.SC.Widget.Events.PAUSE);
       this._internalWidget.unbind(window.SC.Widget.Events.FINISH);
@@ -152,6 +157,7 @@ SoundCloud.propTypes = {
   opts: PropTypes.objectOf(PropTypes.bool),
 
   // event subscriptions
+  onReady: PropTypes.func,
   onPlay: PropTypes.func,
   onPause: PropTypes.func,
   onEnd: PropTypes.func
@@ -160,6 +166,7 @@ SoundCloud.propTypes = {
 SoundCloud.defaultProps = {
   id: "react-sc-widget",
   opts: {},
+  onReady: () => {},
   onPlay: () => {},
   onPause: () => {},
   onEnd: () => {}
