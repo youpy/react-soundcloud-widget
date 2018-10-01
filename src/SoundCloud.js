@@ -4,6 +4,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import QueryString from "query-string";
 import createWidget from "./lib/createWidget";
 
 /**
@@ -16,6 +17,16 @@ import createWidget from "./lib/createWidget";
  * Unfortunately, SoundCloud adds an entry to `window.history` every time
  * a new url is loaded, so changing `props.url` __will__ break the back button.
  */
+
+const buildURL = (url, options) => {
+  return (
+    "https://w.soundcloud.com/player/?" +
+    QueryString.stringify({
+      ...{ url },
+      ...options
+    })
+  );
+};
 
 class SoundCloud extends React.Component {
   /**
@@ -58,7 +69,7 @@ class SoundCloud extends React.Component {
       createWidget(this.iframeEl, widget => {
         if (widget) {
           this._setupWidget(widget);
-          this._reloadWidget();
+          // this._reloadWidget();
         }
       });
     } catch (err) {
@@ -136,7 +147,7 @@ class SoundCloud extends React.Component {
         height={this.props.height || (this.props.opts.visual ? "450" : "166")}
         scrolling="no"
         frameBorder="no"
-        src="https://w.soundcloud.com/player/?url="
+        src={buildURL(this.props.url, this.props.opts)}
         {...(this.props.opts.auto_play ? { allow: "autoplay" } : {})}
       />
     );
