@@ -24,7 +24,7 @@ describe("SoundCloud Widget", () => {
         height="166"
         scrolling="no"
         frameBorder="no"
-        src="https://w.soundcloud.com/player/?url="
+        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fsylvanesso%2Fcoffee"
         ref={output.ref}
       />
     );
@@ -39,7 +39,7 @@ describe("SoundCloud Widget", () => {
         height="166"
         scrolling="no"
         frameBorder="no"
-        src="https://w.soundcloud.com/player/?url="
+        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fsylvanesso%2Fcoffee"
         ref={output.ref}
       />
     );
@@ -54,7 +54,7 @@ describe("SoundCloud Widget", () => {
         height="200"
         scrolling="no"
         frameBorder="no"
-        src="https://w.soundcloud.com/player/?url="
+        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fsylvanesso%2Fcoffee"
         ref={output.ref}
       />
     );
@@ -69,7 +69,7 @@ describe("SoundCloud Widget", () => {
         height="450"
         scrolling="no"
         frameBorder="no"
-        src="https://w.soundcloud.com/player/?url="
+        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fsylvanesso%2Fcoffee&visual=true"
         ref={output.ref}
       />
     );
@@ -84,21 +84,21 @@ describe("SoundCloud Widget", () => {
         height="166"
         scrolling="no"
         frameBorder="no"
-        src="https://w.soundcloud.com/player/?url="
+        src="https://w.soundcloud.com/player/?auto_play=true&url=https%3A%2F%2Fsoundcloud.com%2Fsylvanesso%2Fcoffee"
         ref={output.ref}
         allow="autoplay"
       />
     );
   });
 
-  it("should load a url", () => {
-    expect(renderDOM({ url }).widgetStub.load.calls[0].arguments[0]).toBe(url);
+  it("should not load a url", () => {
+    expect(renderDOM({ url }).widgetStub.load.length).toBe(0);
   });
 
   it("should load a new url", () => {
     const { widgetStub, rerender } = renderDOM({ url });
     rerender({ url: "https://soundcloud.com/sylvanesso/hskt" });
-    expect(widgetStub.load.calls[1].arguments[0]).toBe(
+    expect(widgetStub.load.calls[0].arguments[0]).toBe(
       "https://soundcloud.com/sylvanesso/hskt"
     );
   });
@@ -106,16 +106,16 @@ describe("SoundCloud Widget", () => {
   it("should only load new urls", () => {
     const { widgetStub, rerender } = renderDOM({ url });
     rerender({ url }); // this shouldn't do anything
-    expect(widgetStub.load.calls.length).toBe(1);
+    expect(widgetStub.load.calls.length).toBe(0);
   });
 
   it("should bind event handler props", () => {
-    expect(renderDOM({ url }).widgetStub.bind.calls.length).toBe(3);
+    expect(renderDOM({ url }).widgetStub.bind.calls.length).toBe(4);
   });
 
   it("should unbind event handler props before unmounting", () => {
     const { widgetStub, unmount } = renderDOM({ url });
     unmount();
-    expect(widgetStub.unbind.calls.length).toBe(3);
+    expect(widgetStub.unbind.calls.length).toBe(4);
   });
 });
